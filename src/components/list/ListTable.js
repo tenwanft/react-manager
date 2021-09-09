@@ -9,6 +9,7 @@ export default function ListTable(props){
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getTableList())
+
     },[])
     const columns = [
         {
