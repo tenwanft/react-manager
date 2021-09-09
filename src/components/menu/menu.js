@@ -9,11 +9,18 @@ const { Header, Content, Sider } = Layout;
 
 class AppMenu extends Component{
     state={
-        SubMenuList:[]
+
     }
 
     componentDidMount() {
         this.props.getList()
+        this.props.history.push('/menu/list')
+    }
+
+    goPage=(item)=>{
+        if(item.url){
+            this.props.history.push(item.url)
+        }
     }
 
     render(){
@@ -38,7 +45,7 @@ class AppMenu extends Component{
                         >
                             {
                                 subMenuList.map(item=><SubMenu key={item.key} icon={<UserOutlined />} title={item.title}>
-                                    {item.children.map(item1=><Menu.Item key={item1.key}>{item1.titleText}</Menu.Item>)}
+                                    {item.children.map(item1=><Menu.Item key={item1.key} onClick={()=>{this.goPage(item1)}}>{item1.titleText}</Menu.Item>)}
                                 </SubMenu>)
                             }
                         </Menu>

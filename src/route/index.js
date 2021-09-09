@@ -16,8 +16,8 @@ const AppRoute = ()=>{
                 <Route path='/' exact component={Login}></Route>
                 <Switch>
                     {/*<Route path='/menu' component={(props)=><AppMenu {...props}/>}></Route>*/}
-                    <Route path='/menu' render={()=>{
-                       return <AppMenu>
+                    <Route path='/menu' render={(props)=>{
+                       return <AppMenu {...props}>
                             <Route path='/menu/list' component={ListTable}></Route>
                         </AppMenu>
                     }} />

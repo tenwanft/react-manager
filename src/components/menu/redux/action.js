@@ -2,9 +2,9 @@
 import {getMenuData} from "../../../api/menu";
 let list = {subMenuList:[
     {key:'sub1',title:'sub1',children:[{
-            key:'1',titleText:'option1'
+            key:'1',titleText:'option1',url:'/menu/list'
         },{
-            key:'2',titleText:'option2'
+            key:'2',titleText:'option2',url:'/menu/table'
         },{
             key:'3',titleText:'option3'
         },{
