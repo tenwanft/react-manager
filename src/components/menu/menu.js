@@ -1,30 +1,54 @@
-import React,{Component} from "react";
+import React, {Component, createRef} from "react";
 import { Layout, Menu, Breadcrumb,Spin  } from 'antd';
 import { connect } from "react-redux";
 import '../../index.css'
 import { getList } from "./redux/action";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import TabMenu from "./TabMenu";
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
+const choseMenu = new Map()
 class AppMenu extends Component{
     state={
-
+        selectedKeys:[]
     }
 
     componentDidMount() {
-        this.props.getList()
-        this.props.history.push('/menu/list')
+        const {getList,subMenuList,history} = this.props
+        getList()
+        history.push('/menu/list') //跳到第一个菜单上  后续用路由重定向做
+        this.tabRef = createRef()
+        this.setState({selectedKeys:subMenuList[0]?[subMenuList[0].children[0].key]:[]})
     }
 
-    goPage=(item)=>{
+    goPage=(item,from)=>{
+        // 每次点击这个按钮除了跳转路由还要把tab添加上
         if(item.url){
             this.props.history.push(item.url)
         }
+        this.setState({selectedKeys:item.key})
+
+        //如果不是从tab点击，才添加tab
+        if(!from){
+            choseMenu.set(item.key,item)
+            let values=[...choseMenu].map(item=>item[1])
+            this.tabRef.current.add(values,item.key)
+        }
+
+    }
+
+    //重置tab的,第一次要把那个塞进去，删除了之后还要再塞进去
+    resetTab=(panes)=>{
+        //先清空，再重新塞值
+        choseMenu.clear()
+        panes.map(item=>{
+            choseMenu.set(item.key,item)
+        })
     }
 
     render(){
         const { loading, subMenuList } = this.props
+        const defaultMenu = subMenuList[0]?subMenuList[0].children[0]:{}
         return <div style={{textAlign:'center',lineHeight:'100vh'}}>
             {loading?<Spin/>:<Layout style={{textAlign:'left',lineHeight:'normal'}}>
                 <Header className="header" >
@@ -39,9 +63,9 @@ class AppMenu extends Component{
                     <Sider width={200} className="site-layout-background">
                         <Menu
                             mode="inline"
-                            defaultSelectedKeys={['1']}
                             defaultOpenKeys={['sub1']}
                             style={{ height: '100%', borderRight: 0 }}
+                            selectedKeys={this.state.selectedKeys}
                         >
                             {
                                 subMenuList.map(item=><SubMenu key={item.key} icon={<UserOutlined />} title={item.title}>
@@ -51,11 +75,11 @@ class AppMenu extends Component{
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
+                        <TabMenu ref={this.tabRef} history={this.props.history}
+                                 defaultpanes={[defaultMenu]}
+                                 resetTab={(panes)=>{this.resetTab(panes)}}
+                                 switchTab={(item)=>{this.goPage(item,'children')}}
+                        />
                         <Content
                             className="site-layout-background"
                             style={{
