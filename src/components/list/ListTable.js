@@ -4,7 +4,6 @@ import {useSelector,useDispatch} from 'react-redux'
 import { getTableList } from "./redux/action";
 
 export default function ListTable(props){
-    // const loading = useSelector(state=>state.listReducer.loading)
     const data = useSelector(state=>state.listReducer)
     const dispatch = useDispatch()
     useEffect(()=>{

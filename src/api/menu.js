@@ -1,4 +1,4 @@
-﻿import {service} from "../https";
+﻿import {service} from "../util/https";
 import {objToUrl} from "../util/public.config";
 
 export function getMenuData(data) {

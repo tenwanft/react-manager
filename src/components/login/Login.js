@@ -25,7 +25,9 @@ export function Login(props) {
 
     const onFinish = (values) => {
         console.log('Success:', values);
-        props.history.push('/menu')
+        // props.history.push('/menu')
+        localStorage.setItem('token',values.username)
+        window.location.reload()
     }
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
