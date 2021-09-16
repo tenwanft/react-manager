@@ -3,8 +3,9 @@ import { Layout, Menu,Spin,Tooltip,Modal  } from 'antd';
 import { connect } from "react-redux";
 import '../../index.css'
 import { getList } from "./redux/action";
-import { UserOutlined, LaptopOutlined, NotificationOutlined,LoginOutlined } from '@ant-design/icons';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import TabMenu from "./TabMenu";
+import {LoginOut} from "../login/LoginOut";
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const choseMenu = new Map()
@@ -34,8 +35,8 @@ class AppMenu extends Component{
         if(!from){
             choseMenu.set(item.key,item)
             let values=[...choseMenu].map(item=>item[1])
-            // this.setState({tab:values}) //暂存便于resetTab方法二使用
             this.tabRef.current.add(values,item.key)
+            // this.setState({tab:values}) //暂存便于resetTab方法二使用
         }
 
     }
@@ -47,34 +48,27 @@ class AppMenu extends Component{
         panes.map(item=>{
             choseMenu.set(item.key,item)
         })
-        //方法二，判断是否有，如果有的话就保留，如果那一项没有了，就删除
-        // this.state.tab.map((item)=>{
-        //     if(!panes.map(pane=>pane.key).indexOf(item.key)){
-        //         choseMenu.delete(item.key)
+        //方法二，（在第一次tab有东西的情况下）判断panes是否含有tab里面的，如果有的话就保留，如果那一项没有了，就删除，个人觉得没有法一好
+        //tab如果啥也没有就把这个塞进去
+        // if(this.state.tab.length>0){
+        //     this.state.tab.map((item)=>{
+        //         if(!panes.map(pane=>pane.key).indexOf(item.key)){
+        //             choseMenu.delete(item.key)
+        //         }
+        //     })
+        // }else{
+        //     if(panes[0]){
+        //        panes.map(item=>{
+        //            choseMenu.set(item.key,item)
+        //        })
         //     }
-        // })
-    }
-
-    loginOutModal=()=>{
-       return <Modal title="提示"
-                     visible={this.state.loginOut}
-                     onOk={()=>{
-                         localStorage.removeItem('token')
-                         window.location.reload()
-                     }}
-                     onCancel={()=>{
-                         this.setState({loginOut:false})
-                     }}
-                     okText="确认"
-                     cancelText="取消"
-               >是否退出登录？</Modal>
+        // }
     }
 
     render(){
         const { loading, subMenuList } = this.props
         const defaultMenu = subMenuList[0]?subMenuList[0].children[0]:{}
         return <div style={{textAlign:'center',lineHeight:'100vh'}}>
-            {this.loginOutModal()}
             {loading?<Spin/>:<Layout style={{textAlign:'left',lineHeight:'normal'}}>
                 <Header  >
                     <div className="logo" />
@@ -83,13 +77,7 @@ class AppMenu extends Component{
                         <Menu.Item key="2">nav 2</Menu.Item>
                         <Menu.Item key="3">nav 3</Menu.Item>
                     </Menu>
-                    <div style={{position:'absolute',top:0,right:30}} onClick={()=>{
-                        this.setState({loginOut:true})
-                    }}>
-                        <Tooltip placement="bottom" title={'退出登录'}>
-                            <LoginOutlined style={{color:'#1890ff',fontSize:22}}/>
-                        </Tooltip>
-                    </div>
+                    <LoginOut/>
                 </Header>
                 <Layout>
                     <Sider width={200} className="site-layout-background">

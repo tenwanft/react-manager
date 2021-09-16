@@ -10,6 +10,7 @@ export function LoginOut() {
                       visible={loginOut}
                       onOk={()=>{
                           localStorage.removeItem('token')
+                          window.location.reload()
                       }}
             onCancel={()=>{
                 setLoginOut(false)
@@ -19,9 +20,15 @@ export function LoginOut() {
         >是否退出登录？</Modal>
     }
 
-    return <div style={{position:'absolute',top:0,right:30}}>
-        <Tooltip placement="bottom" title={'退出登录'}>
-            <LoginOutlined style={{color:'#1890ff',fontSize:22}} onClick={setLoginOut(true)}/>
-        </Tooltip>
+    return <div>
+        {loginOutModal()}
+        <div style={{position:'absolute',top:0,right:30}}>
+            <Tooltip placement="bottom" title={'退出登录'}>
+                <LoginOutlined style={{color:'#1890ff',fontSize:22}} onClick={()=>{
+                    setLoginOut(true)
+                }}/>
+            </Tooltip>
+        </div>
     </div>
+
 }
