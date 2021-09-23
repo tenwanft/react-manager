@@ -1,9 +1,9 @@
 // import { Router, Route, Redirect,Switch } from "react-router";
 import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import AppMenu from "../components/menu/menu";
-import {Login} from "../components/login/Login";
 import ListTable from "../components/list/ListTable";
 import Table2 from "../components/table/Table2";
+import Charts from "../components/charts/Charts";
 import PrivateRoute from "./PrivateRoute";
 const routes = {
     path: '/',
@@ -19,6 +19,7 @@ const AppRoute = ()=>{
                 <PrivateRoute path='/menu' component={(props)=><AppMenu {...props}>
                     <Route path='/menu/list' component={ListTable}></Route>
                     <Route path='/menu/tableList' component={Table2}></Route>
+                    <Route path='/menu/charts' component={Charts}></Route>
                 </AppMenu>}></PrivateRoute>
 
                     {/*<Route path='/' exact component={Login}></Route>*/}

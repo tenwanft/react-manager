@@ -2,11 +2,11 @@
 import {getMenuData} from "../../../api/menu";
 let list = {subMenuList:[
     {key:'sub1',title:'sub1',children:[{
-            key:'1',titleText:'option1',url:'/menu/list'
+            key:'1',titleText:'列表1',url:'/menu/list'
         },{
-            key:'2',titleText:'option2',url:'/menu/tableList'
+            key:'2',titleText:'列表2',url:'/menu/tableList'
         },{
-            key:'3',titleText:'option3'
+            key:'3',titleText:'图表1',url:'/menu/charts'
         },{
             key:'4',titleText:'option4'
         }
