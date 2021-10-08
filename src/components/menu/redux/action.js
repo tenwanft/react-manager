@@ -8,7 +8,7 @@ let list = {subMenuList:[
         },{
             key:'3',titleText:'图表1',url:'/menu/charts'
         },{
-            key:'4',titleText:'option4'
+            key:'4',titleText:'option4',url:'/menu/X6Charts'
         }
         ]},
     { key:'sub2',title:'sub2',children:[{

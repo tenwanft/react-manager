@@ -5,6 +5,7 @@
   "dependencies": {
     "@antv/g6": "^4.3.7",
     "@antv/x6": "^1.26.2",
+    "@antv/x6-react-shape": "^1.4.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -44,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/insert-css": "^2.0.1",
+    "@typescript-eslint/parser": "^4.32.0",
+    "typescript": "^4.4.3"
   }
 }
