@@ -1,15 +1,26 @@
-import { useState,useEffect } from "react";
+import {useState, useEffect, useReducer } from "react";
 import { Table, Tag, Space } from 'antd';
 import {useSelector,useDispatch} from 'react-redux'
 import { getTableList } from "./redux/action";
+import { useCallbackState } from "../../util/useCallbackState";
 
 export default function ListTable(props){
     const data = useSelector(state=>state.listReducer)
     const dispatch = useDispatch()
+    // const [count,setCount] = useState(0)
+    const [count,setCount] = useCallbackState(0)
+    const [ ,forceUpdate ] = useReducer(x=>x+1,0)  //这个是强制更新的一个方法
     useEffect(()=>{
         dispatch(getTableList())
-
     },[])
+    useEffect(()=>{
+        console.log(count,'=====')
+    },[count])
+    const a = ()=>{
+        setCount(count+1,(data)=>{
+            console.log(data,'====after====')
+        })
+    }
     const columns = [
         {
             title: 'Name',
@@ -61,5 +72,9 @@ export default function ListTable(props){
 
     return <div>
         <Table columns={columns} dataSource={data.list} size={'small'} loading={data.loading} />
+        <div>
+            {count}
+            <button onClick={a}>加</button>
+        </div>
     </div>
 }
