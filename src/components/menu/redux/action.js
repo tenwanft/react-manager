@@ -8,11 +8,11 @@ let list = {subMenuList:[
         },{
             key:'3',titleText:'图表1',url:'/menu/charts'
         },{
-            key:'4',titleText:'option4',url:'/menu/X6Charts'
+            key:'4',titleText:'流程图',url:'/menu/X6Charts'
         }
         ]},
     { key:'sub2',title:'sub2',children:[{
-            key:'5',titleText:'option5'
+            key:'5',titleText:'性能优化',url:'/menu/test'
         },{
             key:'6',titleText:'option6'
         },{
