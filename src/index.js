@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
 import store from "./store/store";
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
 import AppRoute from "./route";
 import { Provider } from "react-redux";
 // import '../src/components/X6charts/X6Charts.ts'
@@ -11,7 +11,7 @@ function render(){
         <Provider store={store}>
             <AppRoute />
         </Provider>,
-        document.getElementById('root')
+        document.getElementById("root")
     );
 }
 
@@ -26,7 +26,7 @@ export async function mount(props) {
     render()
 }
 export async function unmount(props){
-    ReactDOM.unmountComponentAtNode( document.getElementById('root'));  // 卸载节点
+    ReactDOM.unmountComponentAtNode( document.getElementById("root"));  // 卸载节点
 }
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

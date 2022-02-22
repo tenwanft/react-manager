@@ -1,17 +1,16 @@
 import React, { Fragment, useState,useCallback,useMemo } from "react";
 import { Button, Tag, Divider } from "antd";
-import {ChildComponent} from "./ChildComponent";
-
+import { ChildComponent } from "./ChildComponent";
 export const ParentComponent = () => {
 
     const [count, setCount] = useState(0); //{1}
     const [random, setRandom] = useState(0); //{1}
-    const [,setMemoRandom] = useState(0)
-    const memoizedFn = useCallback(childFn, [])
+    const [,setMemoRandom] = useState(0);
+    const memoizedFn = useCallback(childFn, []);
     // 只在count发生变化时，才会执行消耗性能的计算getState
-    const memoizedValue = useMemo(getState,[count])
+    const memoizedValue = useMemo(getState,[count]);
     function childFn() {
-        console.log(123)
+        console.log(count);
     }
     function getState(){
         console.log("getState run"); //{3}
@@ -24,7 +23,7 @@ export const ParentComponent = () => {
         return temp;
     }
 
-    console.log('memoComputed',memoizedValue)
+    console.log("memoComputed",memoizedValue);
     /* useCallback + memo进行性能优化 避免组件不必要的重复渲染*/
     // 其实是我点击setCount的时候就是对父组件产生影响，没必要对子组件进行更新，所以这个时候我们需要优化
     //在子组件传值只有单个，没有其他项的时候，只要再子组件上面加上memo,可以避免对子组件的重新渲染，若不仅仅只存在一个时，此时一个单纯的memo就没办法实现对子组件不进行渲染，
@@ -42,18 +41,26 @@ export const ParentComponent = () => {
 
             <Divider orientation="left">count</Divider>
             <Tag color="magenta">{count}</Tag>
-            <Button type="primary" onClick={() => setCount(o => o += 1)}>setCount</Button> {/* {2} */}
+            <Button onClick={() => setCount(o => o += 1)}
+                type="primary"
+            >setCount</Button> {/* {2} */}
 
             <Divider orientation="left">random</Divider>
             <Tag color="cyan">{random}</Tag>
-            <Button type="ghost" onClick={() => setRandom(Math.floor(Math.random() * 10 + 1))}>setRandom</Button>  {/* + {5} */}
+            <Button onClick={() => setRandom(Math.floor(Math.random() * 10 + 1))}
+                type="ghost"
+            >setRandom</Button>  {/* + {5} */}
 
             <Divider orientation="left">子组件↓</Divider> {/* {3} */}
-            <ChildComponent state={random} fn={memoizedFn} /> {/* + {7} */}
+            <ChildComponent fn={memoizedFn}
+                state={random}
+            /> {/* + {7} */}
 
             <Divider orientation="left">useMemo的作用↓</Divider>
-            <Button type="ghost" onClick={() => setMemoRandom(Math.floor(Math.random() * 10 + 1))}>setMemoRandom</Button>
+            <Button onClick={() => setMemoRandom(Math.floor(Math.random() * 10 + 1))}
+                type="ghost"
+            >setMemoRandom</Button>
         </Fragment>
-    )
-}
+    );
+};
 

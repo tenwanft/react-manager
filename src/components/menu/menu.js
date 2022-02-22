@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const choseMenu = new Map()
 class AppMenu extends Component{
-    state={
+    state = {
         selectedKeys:[],
         tab:[],//暂存tab
         loginOut:false

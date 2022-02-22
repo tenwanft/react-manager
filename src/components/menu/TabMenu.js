@@ -1,11 +1,11 @@
 import {Component} from "react";
-import { Tabs } from 'antd';
+import { Tabs } from "antd";
 
 const { TabPane } = Tabs;
 
 export default class TabMenu extends Component{
     state = {
-        activeKey: '',
+        activeKey: "",
         panes:[],
         closable:false//默认第一次进来只有一个tab不叫关
     }
@@ -72,14 +72,17 @@ export default class TabMenu extends Component{
     render(){
         return <div>
             <Tabs
+                activeKey={this.state.activeKey}
                 hideAdd
                 onChange={this.onChange}
-                activeKey={this.state.activeKey}
-                type="editable-card"
                 onEdit={this.onEdit}
+                type="editable-card"
             >
                 {this.state.panes.map(pane => (
-                    <TabPane tab={pane.titleText} key={pane.key} closable={this.state.closable}>
+                    <TabPane closable={this.state.closable}
+                        key={pane.key}
+                        tab={pane.titleText}
+                    >
                         {/*{pane.content}*/}
                     </TabPane>
                 ))}
