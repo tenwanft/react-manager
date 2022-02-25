@@ -1,6 +1,7 @@
 import React, { Fragment, useState,useCallback,useMemo } from "react";
 import { Button, Tag, Divider } from "antd";
 import { ChildComponent } from "./ChildComponent";
+
 export const ParentComponent = () => {
 
     const [count, setCount] = useState(0); //{1}
@@ -10,7 +11,7 @@ export const ParentComponent = () => {
     // 只在count发生变化时，才会执行消耗性能的计算getState
     const memoizedValue = useMemo(getState,[count]);
     function childFn() {
-        console.log(count);
+        console.log(count,'子组件的function渲染了');
     }
     function getState(){
         console.log("getState run"); //{3}
@@ -22,11 +23,10 @@ export const ParentComponent = () => {
 
         return temp;
     }
-
     console.log("memoComputed",memoizedValue);
     /* useCallback + memo进行性能优化 避免组件不必要的重复渲染*/
     // 其实是我点击setCount的时候就是对父组件产生影响，没必要对子组件进行更新，所以这个时候我们需要优化
-    //在子组件传值只有单个，没有其他项的时候，只要再子组件上面加上memo,可以避免对子组件的重新渲染，若不仅仅只存在一个时，此时一个单纯的memo就没办法实现对子组件不进行渲染，
+    //在子组件传值只有单个数据，没有function的时候，只要再子组件上面加上memo,可以避免对子组件的重新渲染，若不仅仅存在数据时，只要有function，此时一个单纯的memo就没办法实现对子组件不进行渲染，
     // 造成这个的原因是：子组件身上增加了一个函数，props在传递函数的时候的时候是传递指针，这个时候父组件进行setCount时候回重新声明函数Fn，指针就会发生变化所以就回更新子组件，此时要用到useCallback
     //这时我们要用useCallback对这个方法进行缓存，然后将这个而缓存的值进行传递，这个时候我们的子组件在我们的依赖项为空时就能实现对子组件的优化
 

@@ -14,7 +14,7 @@ let list = {subMenuList:[
     { key:'sub2',title:'sub2',children:[{
             key:'5',titleText:'性能优化',url:'/menu/test'
         },{
-            key:'6',titleText:'option6'
+            key:'6',titleText:'系统菜单',url:'/menu/system'
         },{
             key:'7',titleText:'option7'
         },{

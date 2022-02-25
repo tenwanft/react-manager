@@ -106,3 +106,18 @@ export class MyPromise {
     }
 }
 
+export function reduceAndSort(array) {
+    let set = new Set(array)
+    let newArr = [...set]
+    newArr.sort((a,b)=>{return a-b})
+    return newArr
+}
+
+export const color = {
+    menu:'magenta',
+    route:'geekblue',
+    button:'orange',
+    success:'green',
+    error:'red'
+}
+

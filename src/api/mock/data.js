@@ -1,0 +1,36 @@
+export let data = {subMenuList:[
+        {key:'sub1',type:'menu',title:'sub1',children:[{
+                key:'1',title:'列表1',type:'route',url:'/menu/list',children:[
+                    {key:"b1",title:'新增',type:'button'},
+                    {key:"b2",title:'修改',type:'button'},
+                    {key:"b3",title:'删除',type:'button'}
+                ]
+            },{
+                key:'2',title:'列表2',type:'route',url:'/menu/tableList'
+            },{
+                key:'3',title:'图表1',type:'route',url:'/menu/charts'
+            },{
+                key:'4',title:'流程图',type:'route',url:'/menu/X6Charts'
+            }
+            ]},
+        { key:'sub2',type:'menu',title:'sub2',children:[{
+                key:'5',title:'性能优化',type:'route',url:'/menu/test'
+            },{
+                key:'6',title:'option6',type:'route',
+            },{
+                key:'7',title:'option7',type:'route',
+            },{
+                key:'8',title:'option8',type:'route',
+            }
+            ]},
+        {key:'sub3',type:'menu',title:'sub3',children:[{
+                key:'9',title:'option9',type:'route',
+            },{
+                key:'10',title:'option10',type:'route',
+            },{
+                key:'11',title:'option11',type:'route',
+            },{
+                key:'12',title:'option12',type:'route',
+            }
+            ]}
+    ]}

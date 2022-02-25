@@ -6,6 +6,7 @@ import Table2 from "../components/table/Table2";
 import Charts from "../components/charts/Charts";
 import PrivateRoute from "./PrivateRoute";
 import X6charts from "../components/X6charts/XIndex";
+import SystemList from "../components/system/SystemList";
 import {ParentComponent} from "../components/test/ParentComponent";
 
 const routes = {
@@ -16,7 +17,6 @@ const routes = {
     //     { path: 'inbox', component: Inbox },
     // ]
 }
-
 const AppRoute = ()=>{
     return <Router >
                 <PrivateRoute path='/menu' component={(props)=><AppMenu {...props}>
@@ -25,6 +25,7 @@ const AppRoute = ()=>{
                     <Route path='/menu/charts' component={Charts}></Route>
                     <Route path='/menu/X6Charts' component={X6charts}></Route>
                     <Route path='/menu/test' component={ParentComponent}></Route>
+                    <Route path='/menu/system' component={SystemList}></Route>
                 </AppMenu>}></PrivateRoute>
 
                     {/*<Route path='/' exact component={Login}></Route>*/}

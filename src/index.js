@@ -5,7 +5,6 @@ import store from "./store/store";
 import reportWebVitals from "./reportWebVitals";
 import AppRoute from "./route";
 import { Provider } from "react-redux";
-// import '../src/components/X6charts/X6Charts.ts'
 function render(){
     ReactDOM.render(
         <Provider store={store}>
